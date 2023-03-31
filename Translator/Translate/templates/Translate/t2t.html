@@ -38,7 +38,7 @@
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <div class="card mt-4">
-                    <form action="T2TR" method="POST">
+                    <form action="T2T" method="POST">
                         {% csrf_token %}
                         <div class="card-header bg-white">
                             <div class="row justify-content-between">
@@ -70,32 +70,20 @@
                                 </select>
                             </div>
                             <div class="form-group text-right">
-                                <input type="submit" class="btn btn-translate"/>
+                                <input type="submit" value="Translate" class="btn btn-translate"/>
+                            </div>  
+
+                            {% if result %}
+                              
+                            <h4>Transalted Text</h2>
+                            <div  class="form-group">
+                                <textarea class="form-control text-bold" style="font-weight: 750;" name="text" rows="5"
+                                    placeholder="Enter text or speech">{{result}}</textarea>
                             </div>
+                            {% endif %}
                         </div>
                     </form>
-                    {% comment %} <form action="T2TR" method="POST">
-                        {% csrf_token %}
-                                <div class="col-md-5">
-                                    <h5>Translate</h5>
-                                </div>
-
-                                <textarea class="form-control" name="text" rows="5"
-                                    placeholder="Enter text or speech"></textarea>
-                                <label for="sourceLang">From</label>
-                                <select class="form-control" name="sr">
-                                    <option value="en">English</option>
-                                    <option value="es">Spanish</option>
-                                    <option value="fr">French</option>
-                                </select>
-                                <label for="destLang">To</label>
-                                <select class="form-control"   name="de">
-                                    <option value="en">English</option>
-                                    <option value="es">Spanish</option>
-                                    <option value="fr">French</option>
-                                </select>
-                                <input type="submit" class="btn btn-translate">Translate</button>
-                    </form> {% endcomment %}
+                  
                 </div>
             </div>
         </div>
