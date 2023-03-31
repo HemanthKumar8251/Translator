@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Translator - Input</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS for the page */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        #inputBox,
+        #outputBox {
+            resize: none;
+        }
+
+        .btn-translate {
+            background-color: #4285f4;
+            color: white;
+            font-weight: bold;
+            border-radius: 0;
+            padding: 10px 20px;
+            border: none;
+        }
+
+        .btn-translate:hover {
+            background-color: #3277e8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid mt-4">
+        <h1 class="text-center">Easy Translator</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card mt-4">
+                    <form action="T2TR" method="POST">
+                        {% csrf_token %}
+                        <div class="card-header bg-white">
+                            <div class="row justify-content-between">
+                                <div class="col-md-5">
+                                    <h5>Translate</h5>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <textarea class="form-control" name="text" rows="5"
+                                    placeholder="Enter text or speech"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="sourceLang">From</label>
+                                <select class="form-control" name="sr">
+                                    <option value="en">English</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="destLang">To</label>
+                                <select class="form-control"   name="de">
+                                    <option value="en">English</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                </select>
+                            </div>
+                            <div class="form-group text-right">
+                                <input type="submit" class="btn btn-translate"/>
+                            </div>
+                        </div>
+                    </form>
+                    {% comment %} <form action="T2TR" method="POST">
+                        {% csrf_token %}
+                                <div class="col-md-5">
+                                    <h5>Translate</h5>
+                                </div>
+
+                                <textarea class="form-control" name="text" rows="5"
+                                    placeholder="Enter text or speech"></textarea>
+                                <label for="sourceLang">From</label>
+                                <select class="form-control" name="sr">
+                                    <option value="en">English</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                </select>
+                                <label for="destLang">To</label>
+                                <select class="form-control"   name="de">
+                                    <option value="en">English</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                </select>
+                                <input type="submit" class="btn btn-translate">Translate</button>
+                    </form> {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
