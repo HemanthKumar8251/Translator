@@ -1,48 +1,95 @@
-<style>
-    .speech {
-      border: 1px solid #ddd;
-      width: 300px;
-      padding: 0;
-      margin: 0;
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easy Translator - Input</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Custom CSS for the page */
+    .form-group {
+      margin-bottom: 1rem;
     }
-    .speech input {
-      border: 0;
-      width: 240px;
-      display: inline-block;
-      height: 30px;
+
+    #inputBox,
+    #outputBox {
+      resize: none;
     }
-    .speech img {
-      float: right;
-      width: 40px;
+
+    .btn-translate {
+      background-color: #4285f4;
+      color: white;
+      font-weight: bold;
+      border-radius: 0;
+      padding: 10px 20px;
+      border: none;
+    }
+
+    .btn-translate:hover {
+      background-color: #3277e8;
     }
   </style>
-  
-  <!-- Search Form -->
-  <form id="labnol" method="get" action="https://www.google.com/search">
-    <div class="speech">
-      <input type="text" name="q" id="transcript" placeholder="Speak" />
-      <img onclick="GetSpeech()" src="//i.imgur.com/cHidSVu.gif" />
+</head>
+
+<body>
+  <div class="container-fluid mt-4">
+    <h1 class="text-center">Easy Translator</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="card mt-4">
+          <form action="S2T" method="POST">
+            {% csrf_token %}
+            <div class="card-header bg-white">
+              <div class="row justify-content-between">
+                <div class="col-md-5">
+                  <h5>Translate</h5>
+                </div>
+
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- <div class="form-group">
+                                <textarea class="form-control" name="text" rows="5"
+                                    placeholder="Enter text or speech"></textarea>
+                            </div> -->
+              <div class="form-group">
+                <label for="sourceLang">From</label>
+                <select class="form-control" name="sr">
+                  <option value="en">English</option>
+                  <option value="es">Spanish</option>
+                  <option value="fr">French</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="destLang">To</label>
+                <select class="form-control" name="de">
+                  <option value="en">English</option>
+                  <option value="es">Spanish</option>
+                  <option value="fr">French</option>
+                </select>
+              </div>
+
+              <div class="form-group text-center">
+                <button type="submit" class="btn btn-translate">Speak</button>
+              </div>
+
+              {% if result %}
+              <h4>Transalted Text</h2>
+                <div class="form-group">
+                  <textarea class="form-control text-bold" style="font-weight: 750;" name="text"
+                    rows="5">{{result}}</textarea>
+                </div>
+                <div class="form-group text-right">
+                  <a href="S2T">Refresh</a>
+               </div> 
+              {% endif %}
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  </form>
-  
-  <!-- HTML5 Speech Recognition API -->
-  <script>
-   const GetSpeech = () => {
-        console.log("clicked microphone");
-        const SpeechRecognition =  window.SpeechRecognition || window.webkitSpeechRecognition;
-       
-        let recognition = new SpeechRecognition();
-recognition.onstart = () => {
-                console.log("starting listening, speak in microphone");
-            }
-            recognition.onspeechend = () => {
-                console.log("stopped listening");
-                recognition.stop();
-            }
-            recognition.onresult = (result) => {
-                console.log(result.results[0][0].transcript);
-             }
-         
-             recognition.start();
-    }
-  </script>
+  </div>
+</body>
+
+</html>

@@ -9,44 +9,38 @@ def T2T(request):
     if(request.method == 'GET'):
         return render(request,'Translate/t2t.html')
     if(request.method == 'POST'): 
-        print('post') 
+        # print('post') 
         text = request.POST['text']
-        print(text)
-        print(type(text))
+        # print(text)
+        # print(type(text))
         sr = request.POST['sr']
         de = request.POST['de']
-        print(sr,de)
+        # print(sr,de)
         translator = Translator()
         translated = translator.translate(text,src= sr, dest =  de)
         result = translated.text
-        print(result)
+        # print(result)
         return render(request,'Translate/t2t.html',{'result':result})
 
     
 def S2T(request):
      if(request.method == 'GET'):
         return render(request,'Translate/s2t.html')
-     if(request.method == 'POST'): 
-        print('post') 
+     if(request.method == 'POST'):  
         sr = request.POST['sr']
         de = request.POST['de']
-        print(sr,de)
-        
         r = speech.Recognizer()
         with speech.Microphone() as s:
-          print("Speak now...")
-        audio = r.listen(s)
-        try:
-            text = r.recognize_google(audio, language=sr)
-
-            print(f"you have said {text}")
-            translator = Translator()
-            translated = translator.translate(text,src= sr, dest =  de)
-            result = translated.text
-        except Exception as e:
-            result = "Error: {str(e)}"
-        return render(request, 'Translate/s2t.html', {
-            'result' :result
-        })
+            print("Speak now...")
+            audio = r.listen(s)
+            try:
+                text = r.recognize_google(audio, language=sr)
+                print(f"you have said {text}")
+                translator = Translator()
+                translated = translator.translate(text,src= sr, dest =  de)
+                result = translated.text
+            except Exception as e:  
+                result = "Error: {str(e)}"
+        return render(request, 'Translate/s2t.html', {'result' :result})
 def home(request): 
     return render(request,'Translate/index.html')
